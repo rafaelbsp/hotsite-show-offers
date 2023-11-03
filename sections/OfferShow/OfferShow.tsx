@@ -20,9 +20,41 @@ export interface Props {
   listOffers: itemOffer[];
 }
 
-function offerShowtitle({ title, listOffers }: Props) {
-  console.log('--- list', listOffers)
-  console.log('--- time', listOffers)
+
+function showHighLightItem(item:itemOffer) {
+  return (
+    <li class="flex p-4 items-center rounded-2xl h-full">
+      <figure class="mb-9">
+        <Image
+          class="card"
+          src={item.image}
+          alt={item.name}
+          width={500}
+          height={500}
+          loading="lazy"
+        />
+      </figure>
+      <div class="font-[Inter] text-white bg-[#111010]">
+        <CountdownTimer targetDate={item.expiresAt} />
+        <div class="my-2">
+          <p class="font-light text-base">{item.name}</p>
+        </div>
+        <div class="flex gap-2 w-full">
+          <p class="font-black uppercase text-[#464646]">R$ {item.highPrice}</p>
+          <p class="font-black uppercase text-[#FF3D00]">R$ {item.lowPrice}</p>
+        </div>
+        <div class="flex w-full justify-center">
+          <a href={item.url} class="text-base font-black uppercase bg-[#FF3D00] rounded px-8 py-3 border-b-4 border-[#A12700]">Eu quero</a>
+        </div>
+      </div>
+    </li>
+  )
+}
+
+function offerShow({ title, listOffers }: Props) {
+  const items = listOffers;
+  const highLightItem = items.length ? items.splice(0,1)[0] : null;
+  
   return (
     <>
     <Head>
@@ -39,6 +71,10 @@ function offerShowtitle({ title, listOffers }: Props) {
             src="/image/fire_icon.svg"
           />
         </h1>
+          { highLightItem !== null && showHighLightItem(highLightItem) }
+        <div>
+        
+        </div>
       </div>        
     </section>
     <section class="bg-[#1E1C1C] py-24 bg-[url('/image/bg_triangle_top.svg'),_url('/image/bg_triangle_bottom.svg')] bg-[position:top,bottom] bg-repeat-x">
@@ -48,7 +84,7 @@ function offerShowtitle({ title, listOffers }: Props) {
           
         <ul class="grid grid-cols-1 gap-2 items-center sm:grid-cols-4 sm:gap-4">
           {
-            listOffers ? listOffers.map(({image, name, highPrice, lowPrice, url, expiresAt}) => (
+            items ? items.map(({image, name, highPrice, lowPrice, url, expiresAt}) => (
               <li class="font-[Inter] text-white bg-[#111010] p-4 flex flex-col items-center rounded-2xl h-full">
                 <figure class="mb-9">
                   <Image
@@ -81,4 +117,4 @@ function offerShowtitle({ title, listOffers }: Props) {
     );
   }
   
-  export default offerShowtitle;
+  export default offerShow;
