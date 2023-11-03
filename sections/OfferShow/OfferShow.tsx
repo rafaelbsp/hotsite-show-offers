@@ -23,8 +23,8 @@ export interface Props {
 
 function showHighLightItem(item:itemOffer) {
   return (
-    <li class="flex p-4 items-center rounded-2xl h-full">
-      <figure class="mb-9">
+    <div class="flex flex-col pt-16 gap-y-10 items-center rounded-2xl h-full lg:flex-row lg:gap-y-10 lg:gap-x-20">
+      <figure>
         <Image
           class="card"
           src={item.image}
@@ -34,20 +34,20 @@ function showHighLightItem(item:itemOffer) {
           loading="lazy"
         />
       </figure>
-      <div class="font-[Inter] text-white bg-[#111010]">
-        <CountdownTimer targetDate={item.expiresAt} />
+      <div class="flex max-w-2xl flex-grow flex-col h-full gap-2 font-[Inter] text-white bg-[#111010]">
+        <CountdownTimer size="big" targetDate={item.expiresAt} />
         <div class="my-2">
-          <p class="font-light text-base">{item.name}</p>
+          <p class="font-light text-base lg:text-3xl">{item.name}</p>
         </div>
-        <div class="flex gap-2 w-full">
-          <p class="font-black uppercase text-[#464646]">R$ {item.highPrice}</p>
-          <p class="font-black uppercase text-[#FF3D00]">R$ {item.lowPrice}</p>
+        <div class="flex gap-2 lg:gap-6 w-full">
+          <p class="font-black lg:text-4xl uppercase text-[#464646]">R$ {item.highPrice}</p>
+          <p class="font-black lg:text-4xl uppercase text-[#FF3D00]">R$ {item.lowPrice}</p>
         </div>
-        <div class="flex w-full justify-center">
+        <div class="flex w-full lg:pt-8">
           <a href={item.url} class="text-base font-black uppercase bg-[#FF3D00] rounded px-8 py-3 border-b-4 border-[#A12700]">Eu quero</a>
         </div>
       </div>
-    </li>
+    </div>
   )
 }
 
@@ -71,10 +71,8 @@ function offerShow({ title, listOffers }: Props) {
             src="/image/fire_icon.svg"
           />
         </h1>
-          { highLightItem !== null && showHighLightItem(highLightItem) }
-        <div>
-        
-        </div>
+
+        { highLightItem !== null && showHighLightItem(highLightItem) }
       </div>        
     </section>
     <section class="bg-[#1E1C1C] py-24 bg-[url('/image/bg_triangle_top.svg'),_url('/image/bg_triangle_bottom.svg')] bg-[position:top,bottom] bg-repeat-x">
@@ -96,7 +94,7 @@ function offerShow({ title, listOffers }: Props) {
                     loading="lazy"
                   />
                 </figure>
-                <CountdownTimer targetDate={expiresAt} />
+                <CountdownTimer size="normal"  targetDate={expiresAt} />
                 <div class="my-2">
                   <p class="font-light text-base">{name}</p>
                 </div>

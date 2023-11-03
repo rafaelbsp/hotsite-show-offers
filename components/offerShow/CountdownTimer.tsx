@@ -2,6 +2,7 @@ import { useState, useEffect } from 'preact/hooks';
 
 export interface Props {
   targetDate: string;
+  size: string;
 }
 
 const CountdownTimer = (props: Props) => {
@@ -11,6 +12,11 @@ const CountdownTimer = (props: Props) => {
     minutes: 0,
     seconds: 0,
   });
+
+  const timerItem = props.size === 'big' ? 'lg:w-20 lg:h-20' : '';
+  const timerItemGap = props.size === 'big' ? 'lg:gap-3' : '';
+  const timerSizeNumber = props.size === 'big' ? 'lg:text-4xl' : '';
+  const timerSizeText = props.size === 'big' ? 'lg:text-xs' : '';
 
   useEffect(() => {
     const targetDate = new Date(props.targetDate).getTime();
@@ -41,22 +47,22 @@ const CountdownTimer = (props: Props) => {
   }, [props.targetDate]);
 
   return (
-    <div class="flex gap-1">
-      <div class="flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black">
-        <span class="text-lg">{countdown.days}</span>
-				<span class="text-[8px] uppercase">Dias</span>
+    <div class={`flex gap-1 ${timerItemGap}`}>
+      <div class={`flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black ${timerItem}`}>
+        <span class={`text-lg ${timerSizeNumber}`}>{countdown.days}</span>
+				<span class={`text-[8px] ${timerSizeText} uppercase`}>Dias</span>
     	</div>
-      <div class="flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black">
-        <span class="text-lg">{countdown.hours}</span>
-				<span class="text-[8px] uppercase">Horas</span>
+      <div class={`flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black ${timerItem}`}>
+        <span class={`text-lg ${timerSizeNumber}`}>{countdown.hours}</span>
+				<span class={`text-[8px] ${timerSizeText} uppercase`}>Horas</span>
     	</div>
-      <div class="flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black">
-        <span class="text-lg">{countdown.minutes}</span>
-				<span class="text-[8px] uppercase">Minutos</span>
+      <div class={`flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black ${timerItem}`}>
+        <span class={`text-lg ${timerSizeNumber}`}>{countdown.minutes}</span>
+				<span class={`text-[8px] ${timerSizeText} uppercase`}>Minutos</span>
     	</div>
-      <div class="flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black">
-        <span class="text-lg">{countdown.seconds}</span>
-				<span class="text-[8px] uppercase">Segundos</span>
+      <div class={`flex flex-col items-center justify-center w-14 h-14 bg-[#1E1C1C] rounded-lg font-black ${timerItem}`}>
+        <span class={`text-lg ${timerSizeNumber}`}>{countdown.seconds}</span>
+				<span class={`text-[8px] ${timerSizeText} uppercase`}>Segundos</span>
     	</div>
     </div>
   );
