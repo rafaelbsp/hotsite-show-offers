@@ -1,0 +1,30 @@
+<svg
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+  style="width: 200px; height auto; animation: animName 5s linear infinite;"
+>
+  <style>
+    @keyframes animName {
+    0%{
+        transform: rotate(0deg);
+      }
+    100%{
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <g>
+    <path
+    id="circlePath"
+    style=""
+    fill="transparent"
+    d="M 10, 50 a 40,40 0 1,1 80,0 40,40 0 1,1 -80,0"
+  />
+  <text>
+    <textPath href="#circlePath" style="font-size: 11px;">
+      A BLACK FRIDAY CHEGOU VAI PEGAR FOGO!
+    </textPath>
+  </text>
+  </g>
+  
+</svg>

@@ -1,7 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import CountdownTimer from "$store/islands/CountdownTimer.tsx"
+import CountdownTimer from "$store/islands/CountdownTimer.tsx";
+import CouponsList from "$store/sections/OfferShow/CouponsList.tsx";
 
 export interface itemOffer {
   image: ImageWidget;
@@ -15,9 +16,18 @@ export interface itemOffer {
    */
   expiresAt: string;
 }
+
+export interface coupon {
+  title: string;
+  /** @format textarea */
+  description?: string;
+  code: string;
+}
+
 export interface Props {
   title?: string;
   listOffers: itemOffer[];
+  coupons: coupon[];
 }
 
 function showHighLightItem(item:itemOffer) {
@@ -33,18 +43,18 @@ function showHighLightItem(item:itemOffer) {
           loading="lazy"
         />
       </figure>
-      <div class="flex max-w-2xl flex-grow flex-col h-full gap-2 font-[Inter] text-white bg-[#111010]">
+      <div class="flex max-w-2xl flex-grow flex-col h-full gap-2 font-[Inter] text-white bg-[#111010] items-center lg:items-start">
         <CountdownTimer size="big" targetDate={item.expiresAt} />
-        <div class="my-2">
+        <div class="my-2 text-center lg:text-start">
           <p class="font-light text-base lg:text-3xl">{item.name}</p>
         </div>
-        <div class="flex gap-2 lg:gap-6 w-full">
-          <p class="relative font-black lg:text-4xl uppercase text-[#464646]">
+        <div class="flex gap-2 lg:gap-6 w-full justify-center lg:justify-start">
+          <p class="relative font-black text-2xl lg:text-4xl uppercase text-[#464646]">
             R$ {item.highPrice}
             <span class="content-[''] absolute w-full h-[7px] bg-[#464646] block -rotate-6 m-auto rounded-full border-2 border-solid border-[#111010] inset-y-0"></span></p>
-          <p class="font-black lg:text-4xl uppercase text-[#FF3D00]">R$ {item.lowPrice}</p>
+          <p class="font-black text-2xl lg:text-4xl uppercase text-[#FF3D00]">R$ {item.lowPrice}</p>
         </div>
-        <div class="flex w-full lg:pt-8">
+        <div class="flex w-full lg:pt-8 justify-center lg:justify-start">
           <a href={item.url} class="text-base font-black uppercase bg-[#FF3D00] rounded px-8 py-3 border-b-4 border-[#A12700]">Eu quero</a>
         </div>
       </div>
@@ -52,7 +62,7 @@ function showHighLightItem(item:itemOffer) {
   )
 }
 
-function offerShow({ title, listOffers }: Props) {
+function offerShow({ title, listOffers, coupons }: Props) {
   const items = listOffers;
   const highLightItem = items.length ? items.splice(0,1)[0] : null;
   
@@ -77,10 +87,8 @@ function offerShow({ title, listOffers }: Props) {
       </div>        
     </section>
     <section class="bg-[#1E1C1C] py-24 bg-[url('/image/bg_triangle_top.svg'),_url('/image/bg_triangle_bottom.svg')] bg-[position:top,bottom] bg-repeat-x">
-      <div class="max-w-screen-2xl px-8 2xl:px-0">
+      <div class="max-w-screen-2xl mx-auto px-8 2xl:px-0">
         <h3 class="font-[Inter] text-white uppercase font-light text-2xl mb-6">{title}</h3>
-
-          
         <ul class="grid grid-cols-1 gap-2 items-center sm:grid-cols-2 sm:gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4">
           {
             items ? items.map(({image, name, highPrice, lowPrice, url, expiresAt}) => (
@@ -110,6 +118,23 @@ function offerShow({ title, listOffers }: Props) {
             )) : ''
           }
         </ul>
+      </div>
+    </section>
+    <section class="bg-[#111010] py-24">
+      <div class="max-w-screen-2xl mx-auto px-8 2xl:px-0">
+        <div class="flex flex-col items-center justify-center">
+          <h2 class="font-[Inter] text-white text-center uppercase font-black min-w-screen-xl text-2xl lg:text-3xl">Ainda não achou a oferta que está procurando?</h2>
+          <p class="font-[Inter] text-white text-center uppercase font-light min-w-screen-xl text-sm lg:text-base">Então da uma olhada aqui abaixo que eu tenho cupons quentinhos para você.</p>
+        </div>
+        <div>
+          <ul class="flex gap-4 flex-wrap p-10 justify-center items-center">
+          {
+            coupons ? coupons.map(({title, description, code}) => (
+              <CouponsList title={title} description={description} code={code} />
+            )) : ''
+          }
+          </ul>
+        </div>
       </div>
     </section>
     </>
