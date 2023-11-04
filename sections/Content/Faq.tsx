@@ -70,7 +70,7 @@ function Contact({ title, description, link }: Contact) {
   return (
     <div class="flex flex-col gap-6 items-center text-center">
       <div class="flex flex-col gap-2">
-        {title && <h2 class="text-xl lg:text-3xl">{title}</h2>}
+        {title && <h2 class="text-xl text-white lg:text-3xl">{title}</h2>}
         {description && (
           <div
             class="text-lg lg:text-xl"
@@ -130,21 +130,23 @@ export default function FAQ(props: Props) {
       )}
 
       {layout?.variation === "Side to side" && (
-        <div class="w-full container px-4 py-8 grid gap-8 grid-flow-row grid-cols-1 lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-2 lg:py-10 lg:px-0">
-          <div class="order-1 lg:order-1">
-            <Header
-              title={title || ""}
-              description={description || ""}
-              alignment={layout?.headerAlignment || "center"}
-            />
-          </div>
-          <div class="order-2 lg:order-3 lg:row-span-2">
-            <div class="join join-vertical">
-              {questions.map((question) => <Question {...question} />)}
+        <div class="w-full bg-[#111010] ">
+          <div class="w-full container px-4 py-8 grid gap-8 grid-flow-row grid-cols-1 lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-2 lg:py-10 lg:px-0">
+            <div class="order-1 lg:order-1">
+              <Header
+                title={title || ""}
+                description={description || ""}
+                alignment={layout?.headerAlignment || "center"}
+              />
             </div>
-          </div>
-          <div class="order-3 lg:order-2">
-            <Contact {...contact} />
+            <div class="order-2 lg:order-3 lg:row-span-2">
+              <div class="join join-vertical">
+                {questions.map((question) => <Question {...question} />)}
+              </div>
+            </div>
+            <div class="order-3 lg:order-2">
+              <Contact {...contact} />
+            </div>
           </div>
         </div>
       )}
