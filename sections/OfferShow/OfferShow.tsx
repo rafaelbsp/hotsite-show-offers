@@ -20,7 +20,6 @@ export interface Props {
   listOffers: itemOffer[];
 }
 
-
 function showHighLightItem(item:itemOffer) {
   return (
     <div class="flex flex-col pt-16 gap-y-10 items-center rounded-2xl h-full lg:flex-row lg:gap-y-10 lg:gap-x-20">
@@ -40,7 +39,9 @@ function showHighLightItem(item:itemOffer) {
           <p class="font-light text-base lg:text-3xl">{item.name}</p>
         </div>
         <div class="flex gap-2 lg:gap-6 w-full">
-          <p class="font-black lg:text-4xl uppercase text-[#464646]">R$ {item.highPrice}</p>
+          <p class="relative font-black lg:text-4xl uppercase text-[#464646]">
+            R$ {item.highPrice}
+            <span class="content-[''] absolute w-full h-[7px] bg-[#464646] block -rotate-6 m-auto rounded-full border-2 border-solid border-[#111010] inset-y-0"></span></p>
           <p class="font-black lg:text-4xl uppercase text-[#FF3D00]">R$ {item.lowPrice}</p>
         </div>
         <div class="flex w-full lg:pt-8">
@@ -63,7 +64,7 @@ function offerShow({ title, listOffers }: Props) {
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
     </Head>
     <section class="bg-[#111010] py-24">
-      <div class="container pl-30 pr-30">
+      <div class="container px-8 2xl:px-0 pl-30 pr-30">
         <h1 class="font-[Inter] text-white uppercase font-black min-w-screen-xl text-3xl leading-6 lg:text-8xl lg:leading-[4.5rem]">
           A BLACK FRIDAY<br /> VAI PEGAR <span class="text-[#FF3D00]">FOGO</span>
           <img
@@ -76,11 +77,11 @@ function offerShow({ title, listOffers }: Props) {
       </div>        
     </section>
     <section class="bg-[#1E1C1C] py-24 bg-[url('/image/bg_triangle_top.svg'),_url('/image/bg_triangle_bottom.svg')] bg-[position:top,bottom] bg-repeat-x">
-      <div class="container">
+      <div class="max-w-screen-2xl px-8 2xl:px-0">
         <h3 class="font-[Inter] text-white uppercase font-light text-2xl mb-6">{title}</h3>
 
           
-        <ul class="grid grid-cols-1 gap-2 items-center sm:grid-cols-4 sm:gap-4">
+        <ul class="grid grid-cols-1 gap-2 items-center sm:grid-cols-2 sm:gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4">
           {
             items ? items.map(({image, name, highPrice, lowPrice, url, expiresAt}) => (
               <li class="font-[Inter] text-white bg-[#111010] p-4 flex flex-col items-center rounded-2xl h-full">
