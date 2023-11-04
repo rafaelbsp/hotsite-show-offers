@@ -59,7 +59,7 @@ function Question({ question, answer }: Question) {
         {question}
       </summary>
       <div
-        class="collapse-content"
+        class="collapse-content text-white"
         dangerouslySetInnerHTML={{ __html: answer }}
       />
     </details>
@@ -73,7 +73,7 @@ function Contact({ title, description, link }: Contact) {
         {title && <h2 class="text-xl text-white lg:text-3xl">{title}</h2>}
         {description && (
           <div
-            class="text-lg lg:text-xl"
+            class="text-lg lg:text-xl text-white"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}

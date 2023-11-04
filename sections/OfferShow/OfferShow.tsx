@@ -63,7 +63,7 @@ function offerShow({ title, listOffers }: Props) {
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
     </Head>
     <section class="bg-[#111010] py-24">
-      <div class="container">
+      <div class="container pl-30 pr-30">
         <h1 class="font-[Inter] text-white uppercase font-black min-w-screen-xl text-3xl leading-6 lg:text-8xl lg:leading-[4.5rem]">
           A BLACK FRIDAY<br /> VAI PEGAR <span class="text-[#FF3D00]">FOGO</span>
           <img
@@ -96,9 +96,9 @@ function offerShow({ title, listOffers }: Props) {
                 </figure>
                 <CountdownTimer size="normal"  targetDate={expiresAt} />
                 <div class="my-2">
-                  <p class="font-light text-base">{name}</p>
+                  <p class="font-light text-base text-center">{name}</p>
                 </div>
-                <div class="flex gap-2 w-full">
+                <div class="flex gap-2 w-full items-center justify-center mb-10 ">
                   <p class="font-black uppercase text-[#464646]">R$ {highPrice}</p>
                   <p class="font-black uppercase text-[#FF3D00]">R$ {lowPrice}</p>
                 </div>
